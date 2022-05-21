@@ -3,11 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Don-yoshi/Documents/Dedooo_v2/src/com/digitalpersona/onetouch/ui/swing/sample/Enrollment/Forma_verificacion.java</file>
-            <file>file:/C:/Users/Don-yoshi/Documents/Dedooo_v2/src/com/digitalpersona/onetouch/ui/swing/sample/Enrollment/Huella_main.java</file>
-            <file>file:/C:/Users/Don-yoshi/Documents/Dedooo_v2/src/com/digitalpersona/onetouch/ui/swing/sample/Enrollment/Forma_Ins.java</file>
-            <file>file:/C:/Users/Don-yoshi/Documents/Dedooo_v2/src/com/digitalpersona/onetouch/ui/swing/sample/Enrollment/Forma_Captura.java</file>
-            <file>file:/C:/Users/Don-yoshi/Documents/Dedooo_v2/src/com/digitalpersona/onetouch/ui/swing/sample/Enrollment/Vista_llenadatos.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/gui/Forma_Ins.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/entidades/Cuenta.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/gui/Forma_verificacion.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/gui/Forma_Captura.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/entidades/Sucursal.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/entidades/Transacciones.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/gui/Vista_llenadatos.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/gui/Huella_main.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/conexion/ConexionDB.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/entidades/Empleado.java</file>
+            <file>file:/B:/Proyectos/GItHub/finger_desktop/src/entidades/Cliente.java</file>
         </group>
     </open-files>
 </project-private>
