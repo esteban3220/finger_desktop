@@ -43,12 +43,11 @@ public class ConexionDB {
     }
     
     
-    public ResultSet ejecuta(String sql,String a,String b,String c,String d,String e,String f,String g,String filename) {
+    public ResultSet ejecuta(String sql,String a,String b,String c,String d,String e,String f,String g,File file) {
         ResultSet resultado = null;
         try {
             PreparedStatement s =  ConexionDB().prepareStatement(sql);
             //s.executeUpdate(sql
-            File file = new File(filename);
             FileInputStream input = new FileInputStream(file);
             s.setString(1, a);
             s.setString(2, b);

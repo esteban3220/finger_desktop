@@ -518,7 +518,7 @@ public class Vista_llenadatos extends javax.swing.JFrame {
                         ConexionDB query = new ConexionDB();
                         query.ejecuta("insert into usuario values(null,?,?,?,?,?,?,?,?)", ety_nombre.getText(), ety_Apaterno.getText(),
                                 ety_Amaterno.getText(), ety_nac.getText(), ety_nip1.getText(), ety_telefono.getText(),
-                                 ety_curp.getText(), "C:\\Users\\Don-yoshi\\Documents\\file.ftp");
+                                 ety_curp.getText(), file);
                         break;
 
                     case TEMPLATE_STATUS_FAILED:
