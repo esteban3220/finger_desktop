@@ -16,21 +16,21 @@ import com.digitalpersona.onetouch.capture.event.DPFPReaderStatusEvent;
 import com.digitalpersona.onetouch.capture.event.DPFPSensorAdapter;
 import com.digitalpersona.onetouch.capture.event.DPFPSensorEvent;
 import com.digitalpersona.onetouch.processing.*;
+import javax.swing.UIManager;   
 import java.awt.Image;
 import conexion.ConexionDB;
 import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -63,7 +63,6 @@ public class Vista_llenadatos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         ety_nombre = new javax.swing.JTextField();
         ety_Apaterno = new javax.swing.JTextField();
-        ety_telefono = new javax.swing.JTextField();
         ety_Amaterno = new javax.swing.JTextField();
         ety_curp = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -77,6 +76,7 @@ public class Vista_llenadatos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         ety_nip1 = new javax.swing.JPasswordField();
         ety_nip2 = new javax.swing.JPasswordField();
+        ety_telefono = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         huella_ico = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -135,8 +135,16 @@ public class Vista_llenadatos extends javax.swing.JFrame {
                 formComponentShown(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Datos"));
         jPanel1.setToolTipText("Mete los a datos a registrar");
         jPanel1.setAutoscrolls(true);
 
@@ -148,8 +156,6 @@ public class Vista_llenadatos extends javax.swing.JFrame {
         });
 
         ety_Apaterno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        ety_telefono.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         ety_Amaterno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -186,6 +192,14 @@ public class Vista_llenadatos extends javax.swing.JFrame {
         ety_nip1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         ety_nip2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        ety_telefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        ety_telefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        ety_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ety_telefonoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -225,13 +239,15 @@ public class Vista_llenadatos extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(ety_nip2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(ety_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ety_curp, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addGap(285, 285, 285))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(ety_telefono)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ety_curp, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
@@ -266,15 +282,15 @@ public class Vista_llenadatos extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ety_telefono)
-                            .addComponent(ety_curp))
+                            .addComponent(ety_curp)
+                            .addComponent(ety_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(57, 57, 57))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Huella"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Huella"));
         jPanel2.setToolTipText("Da de alta tu heulla");
 
         huella_ico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -340,8 +356,8 @@ public class Vista_llenadatos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(prompt))
@@ -349,10 +365,6 @@ public class Vista_llenadatos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ety_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ety_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ety_nombreActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
@@ -383,11 +395,28 @@ public class Vista_llenadatos extends javax.swing.JFrame {
                 ety_telefono.setEnabled(false);
                 huella_ico.setEnabled(true);
                 start();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(Vista_llenadatos.this, "El NIP no coincide.", "Registro de Usuarios", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ety_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ety_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ety_nombreActionPerformed
+
+    private void ety_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ety_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ety_telefonoActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Vista_main main = new Vista_main();
+        main.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -395,30 +424,19 @@ public class Vista_llenadatos extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+       
+            try {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(Vista_llenadatos.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vista_llenadatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vista_llenadatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vista_llenadatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vista_llenadatos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        /* Create and display the form */
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        
+        
                 new Vista_llenadatos().setVisible(true);
-            }
-        });
+            
     }
 
     protected void init() {
@@ -516,16 +534,16 @@ public class Vista_llenadatos extends javax.swing.JFrame {
                         setPrompt("Haga clic en Cerrar y luego haga clic en Verificación de huellas dactilares.");
 
                         ConexionDB query = new ConexionDB();
-                        query.ejecuta("insert into usuario values(null,?,?,?,?,?,?,?,?)", ety_nombre.getText(), ety_Apaterno.getText(),
+                        JOptionPane.showMessageDialog(Vista_llenadatos.this, "Tu numero de cuenta es:"+query.ejecuta("insert into usuario values(null,?,?,?,?,?,?,?,?)", ety_nombre.getText(), ety_Apaterno.getText(),
                                 ety_Amaterno.getText(), ety_nac.getText(), ety_nip1.getText(), ety_telefono.getText(),
-                                 ety_curp.getText(), file);
+                                ety_curp.getText(), file)+" Ya puedes cerrar esta ventana Asegurate de recordar este numero" , "Registro de huellas dactilares", JOptionPane.INFORMATION_MESSAGE);
+                        
                         break;
 
                     case TEMPLATE_STATUS_FAILED:
                         enroller.clear();
                         stop();
                         updateStatus();
-                        ((Huella_main) getOwner()).setTemplate(null);
                         JOptionPane.showMessageDialog(Vista_llenadatos.this, "La plantilla de huella digital no es válida. Repita el registro de huellas dactilares.", "Registro de huellas dactilares", JOptionPane.ERROR_MESSAGE);
                         start();
                         break;
@@ -536,9 +554,7 @@ public class Vista_llenadatos extends javax.swing.JFrame {
 
     // Crea la imagen
     protected void process(DPFPSample sample) {
-
         drawPicture(convertSampleToBitmap(sample));
-
     }
 
     private void updateStatus() {
@@ -589,6 +605,8 @@ public class Vista_llenadatos extends javax.swing.JFrame {
             return null;
         }
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ety_Amaterno;
@@ -598,7 +616,7 @@ public class Vista_llenadatos extends javax.swing.JFrame {
     private javax.swing.JPasswordField ety_nip1;
     private javax.swing.JPasswordField ety_nip2;
     private javax.swing.JTextField ety_nombre;
-    private javax.swing.JTextField ety_telefono;
+    private javax.swing.JFormattedTextField ety_telefono;
     private javax.swing.JLabel huella_ico;
     private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
